@@ -7,29 +7,25 @@ const SearchPage=({optionChangerHandler,AllBooks})=>{
   const[booksList,setBooksList]=React.useState([]);
   const handleSearch = event => {
     setSearchTerm(event.target.value);
-    console.log("handler "+searchTerm)
   };
   const handleShelfBooks=(AllBooks,searchResult)=>{
-     for(let i=0;i<AllBooks.length;i++){
-      let index=searchResult.findIndex(result=>(result.id===AllBooks[i].id));
-      console.log(index);
-      if(index!==-1) searchResult[index]=AllBooks[i];
-     }
-     return searchResult;
-  }
+    for(let i=0;i<AllBooks.length;i++){
+     let index=searchResult.findIndex(result=>(result.id===AllBooks[i].id));
+     if(index!==-1) searchResult[index]=AllBooks[i];
+    }
+    return searchResult;
+ }
   React.useEffect(()=>{
+    if(searchTerm.length===0) setBooksList([]);
+    else
     search(searchTerm)
-    .then(result=>{
-
-        if(Array.isArray(result))
-        {  
-            setBooksList((AllBooks,result)=>handleShelfBooks(AllBooks,result));
-        }else{
-            setBooksList([]);
-        }
-    })
+    .then(result=> (Array.isArray(result))? 
+        setBooksList(handleShelfBooks(AllBooks,result))
+        : 
+        setBooksList([])
+        )
     
-  },[searchTerm]);
+  },[searchTerm,AllBooks]);
 
     return (
     <div className="search-books">

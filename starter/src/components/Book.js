@@ -1,7 +1,6 @@
 import BookshelfChanger from "./BookShelfChanger";
 const Book=({bookItem,optionChangerHandler})=>{
   let option=(bookItem.shelf!=null)? bookItem.shelf:"none";
-  console.log(option);
     return(
         <div className="book">
         <div className="book-top">
