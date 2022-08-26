@@ -16,13 +16,13 @@ const SearchPage=({optionChangerHandler,AllBooks})=>{
     return searchResult;
  }
   React.useEffect(()=>{
-    if(searchTerm.length===0) setBooksList([]);
-    else
+
     search(searchTerm)
-    .then(result=> (Array.isArray(result))? 
+    .then(result=>{
+      (Array.isArray(result))?
         setBooksList(handleShelfBooks(AllBooks,result))
         : 
-        setBooksList([])
+        setBooksList([])}
         )
     
   },[searchTerm,AllBooks]);
