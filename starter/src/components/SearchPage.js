@@ -23,7 +23,7 @@ const SearchPage=({optionChangerHandler,AllBooks})=>{
 
         if(Array.isArray(result))
         {  
-            setBooksList(handleShelfBooks(AllBooks,result));
+            setBooksList((AllBooks,result)=>handleShelfBooks(AllBooks,result));
         }else{
             setBooksList([]);
         }
